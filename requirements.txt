@@ -9,4 +9,4 @@ pillow
 flask_wtf
 wtforms
 
-# -e .
+-e .
