@@ -13,7 +13,7 @@ def get_requirements(file_path:str)->List[str]:
 
 
 setup(
-    name='Movie Recommendation using Flask',
+    name='Resume Analysis',
     version='0.0.1',
     author='susil',
     author_email='susilkumarkct@gmail.com',
