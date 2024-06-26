@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Screening Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename = 'css/index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Screening Analysis</h1>
+        <form method='POST' enctype='multipart/form-data' id="resumeForm">
+            {{form.hidden_tag()}}
+            {{form.file()}}
+            {{form.submit()}}
+        </form>
+        {% if visibility == 'hidden' %}
+        <div id="results" class="hidden">
+        {% else %}
+        <div id="results">
+        {% endif %}
+            <h2>Analysis Results</h2>
+            <p><strong>This resume is about: {{ domain }} domain</strong> <span id="skillsFound"></span></p>
+            
+            {% if render == 'n' %}
+            <p><strong>Skills Found: you dont have any skills that in the recommend one</strong> <span id="skillsFound"></span></p>
+            <p><strong>Skills Recommended: No skills to recommend</strong> <span id="skillsNeeded"></span></p>
+
+            {% elif render == 'r' %}
+            <p><strong>Skills Found: you dont have any skills that in the recommend one</strong> <span id="skillsFound"></span></p>
+            <p><strong>Skills Recommended:
+                <ul>{% for i in recommended %}
+                        <li><p>{{ i }}</p></li>
+                    {% endfor %}</ul>
+            </strong> <span id="skillsNeeded"></span></p>
+            
+            {% elif render == 'f' %}
+            <p><strong>Skills Found:
+                <ul>{% for i in found %}
+                    <li><p>{{ i }}</p></li>
+                    {% endfor %}</ul>
+                </strong> <span id="skillsFound"></span></p>
+                <p><strong>Skills Recommended: No skills to recommend</strong> <span id="skillsNeeded"></span></p>
+            
+            {% elif render == 'b' %}
+            <p><strong>Skills Found:
+                <ul>{% for i in found %}
+                    <li><p>{{ i }}</p></li>
+                    {% endfor %}</ul>
+            </strong> <span id="skillsFound"></span></p>
+            <p><strong>Skills Recommended:
+                    <ul>{% for i in recommended %}
+                            <li><p>{{ i }}</p></li>
+                        {% endfor %}</ul>
+            </strong> <span id="skillsNeeded"></span></p>
+
+            {% endif %}          
+            
+        </div>
+    </div>
+</body>
+<script src="{{ url_for('static',filename='script/script.js') }}"></script>
+</html>
